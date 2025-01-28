@@ -13,4 +13,7 @@ spring:
     url: ${LOCAL_DB_URL}
     username: ${LOCAL_DB_USER}
     password: ${LOCAL_DB_PW}
-
+logging:
+  level:
+    # 스프링부트 2.x, hibernate 5.x 에서 가능한 설정
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
