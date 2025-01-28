@@ -5,9 +5,6 @@ import com.seol.giftvoucher_back_end.storage.employee.EmployeeEntity;
 import com.seol.giftvoucher_back_end.storage.employee.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-
 @Service
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
@@ -28,6 +25,7 @@ public class EmployeeService {
        final EmployeeEntity employeeEntity = employeeRepository.findById(no)
                .orElseThrow(()-> new IllegalArgumentException("존재하지 않는 회원입니다."));
 
-       return new EmployeeResponse(employeeEntity.id(), employeeEntity.name(), employeeEntity.position(), employeeEntity.department());
+       return new EmployeeResponse(employeeEntity.id(), employeeEntity.name(), employeeEntity.position(), employeeEntity.department(),
+               employeeEntity.createAt(), employeeEntity.updateAt());
     }
 }
