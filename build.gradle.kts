@@ -27,7 +27,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     runtimeOnly("com.mysql:mysql-connector-j")
-
+    runtimeOnly("com.h2database:h2")
 }
 
 tasks.withType<Test> {
