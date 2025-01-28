@@ -50,4 +50,8 @@ public class VoucherEntity extends BaseEntity {
     public void disalbe() {
         this.status = VoucherStatusType.DISABLE;
     }
+
+    public void use() {
+        this.status = VoucherStatusType.USE;
+    }
 }
