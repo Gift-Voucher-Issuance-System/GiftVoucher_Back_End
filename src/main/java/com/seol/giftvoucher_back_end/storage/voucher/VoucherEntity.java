@@ -13,20 +13,20 @@ public class VoucherEntity extends BaseEntity {
     private String code;
     private VoucherStatusType status;
     private LocalDate validFrom;
-    private LocalDate validto;
+    private LocalDate validTo;
     private Long amount;
 
     public VoucherEntity(){}
 
-    public VoucherEntity(String code, VoucherStatusType status, LocalDate validFrom, LocalDate validto, Long amount){
+    public VoucherEntity(String code, VoucherStatusType status, LocalDate validFrom, LocalDate validTo, Long amount){
         this.code = code;
         this.status = status;
         this.validFrom = validFrom;
-        this.validto = validto;
+        this.validTo = validTo;
         this.amount = amount;
     }
 
-    /*
+
     public String code(){
         return code;
     }
@@ -39,11 +39,11 @@ public class VoucherEntity extends BaseEntity {
         return validFrom;
     }
 
-    public LocalDate validto(){
-        return validto;
+    public LocalDate validTo(){
+        return validTo;
     }
 
     public Long amount(){
         return amount;
-    }*/
+    }
 }
