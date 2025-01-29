@@ -1,12 +1,10 @@
 package com.seol.giftvoucher_back_end.domain.employee;
 
-import com.seol.giftvoucher_back_end.app.controller.response.EmployeeResponse;
+import com.seol.giftvoucher_back_end.app.controller.employee.response.EmployeeResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

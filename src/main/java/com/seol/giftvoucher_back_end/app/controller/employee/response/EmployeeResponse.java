@@ -1,4 +1,4 @@
-package com.seol.giftvoucher_back_end.app.controller.response;
+package com.seol.giftvoucher_back_end.app.controller.employee.response;
 
 import java.time.LocalDateTime;
 

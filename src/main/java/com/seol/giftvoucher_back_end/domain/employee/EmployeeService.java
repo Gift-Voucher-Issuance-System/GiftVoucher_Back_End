@@ -1,6 +1,6 @@
 package com.seol.giftvoucher_back_end.domain.employee;
 
-import com.seol.giftvoucher_back_end.app.controller.response.EmployeeResponse;
+import com.seol.giftvoucher_back_end.app.controller.employee.response.EmployeeResponse;
 import com.seol.giftvoucher_back_end.storage.employee.EmployeeEntity;
 import com.seol.giftvoucher_back_end.storage.employee.EmployeeRepository;
 import org.springframework.stereotype.Service;

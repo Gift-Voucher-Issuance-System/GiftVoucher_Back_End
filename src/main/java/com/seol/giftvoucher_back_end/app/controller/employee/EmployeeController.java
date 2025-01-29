@@ -1,7 +1,7 @@
-package com.seol.giftvoucher_back_end.app.controller;
+package com.seol.giftvoucher_back_end.app.controller.employee;
 
-import com.seol.giftvoucher_back_end.app.controller.request.EmployeeCreateRequest;
-import com.seol.giftvoucher_back_end.app.controller.response.EmployeeResponse;
+import com.seol.giftvoucher_back_end.app.controller.employee.request.EmployeeCreateRequest;
+import com.seol.giftvoucher_back_end.app.controller.employee.response.EmployeeResponse;
 import com.seol.giftvoucher_back_end.domain.employee.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
