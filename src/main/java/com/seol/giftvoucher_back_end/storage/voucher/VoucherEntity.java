@@ -1,8 +1,11 @@
 package com.seol.giftvoucher_back_end.storage.voucher;
 
+import com.seol.giftvoucher_back_end.common.type.VoucherAmountType;
 import com.seol.giftvoucher_back_end.common.type.VoucherStatusType;
 import com.seol.giftvoucher_back_end.storage.BaseEntity;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
@@ -14,11 +17,12 @@ public class VoucherEntity extends BaseEntity {
     private VoucherStatusType status;
     private LocalDate validFrom;
     private LocalDate validTo;
-    private Long amount;
+    @Enumerated(EnumType.STRING)
+    private VoucherAmountType amount;
 
     public VoucherEntity(){}
 
-    public VoucherEntity(String code, VoucherStatusType status, LocalDate validFrom, LocalDate validTo, Long amount){
+    public VoucherEntity(String code, VoucherStatusType status, LocalDate validFrom, LocalDate validTo, VoucherAmountType amount){
         this.code = code;
         this.status = status;
         this.validFrom = validFrom;
@@ -43,7 +47,7 @@ public class VoucherEntity extends BaseEntity {
         return validTo;
     }
 
-    public Long amount(){
+    public VoucherAmountType amount(){
         return amount;
     }
 

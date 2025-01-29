@@ -1,5 +1,6 @@
 package com.seol.giftvoucher_back_end.domain.service;
 
+import com.seol.giftvoucher_back_end.common.type.VoucherAmountType;
 import com.seol.giftvoucher_back_end.common.type.VoucherStatusType;
 import com.seol.giftvoucher_back_end.storage.voucher.VoucherEntity;
 import com.seol.giftvoucher_back_end.storage.voucher.VoucherRepository;
@@ -19,9 +20,9 @@ public class VoucherService {
 
     // 상품권 발행
     @Transactional
-    public String publish(final LocalDate validFrom, final LocalDate validTo, final Long amount){
+    public String publish(final LocalDate validFrom, final LocalDate validTo, final VoucherAmountType amountType){
         final String code = UUID.randomUUID().toString().toUpperCase().replaceAll("-", "");
-        final VoucherEntity voucherEntity = new VoucherEntity(code, VoucherStatusType.PUBLISH, validFrom, validTo, amount);
+        final VoucherEntity voucherEntity = new VoucherEntity(code, VoucherStatusType.PUBLISH, validFrom, validTo, amountType);
 
         return voucherRepository.save(voucherEntity).code();
     }

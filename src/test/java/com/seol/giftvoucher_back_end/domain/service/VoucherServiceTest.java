@@ -1,5 +1,6 @@
 package com.seol.giftvoucher_back_end.domain.service;
 
+import com.seol.giftvoucher_back_end.common.type.VoucherAmountType;
 import com.seol.giftvoucher_back_end.common.type.VoucherStatusType;
 import com.seol.giftvoucher_back_end.storage.voucher.VoucherEntity;
 import com.seol.giftvoucher_back_end.storage.voucher.VoucherRepository;
@@ -28,7 +29,7 @@ class VoucherServiceTest {
         final LocalDate validFrom = LocalDate.now();
         final LocalDate validTo = LocalDate.now().plusDays(30);
 
-        final Long amount = 1000L;
+        final VoucherAmountType amount = VoucherAmountType.KRW_30000;
 
         final String code = voucherService.publish(validFrom, validTo, amount);
 
@@ -49,7 +50,7 @@ class VoucherServiceTest {
         //Given
         final LocalDate validFrom = LocalDate.now();
         final LocalDate validTo = LocalDate.now().plusDays(30);
-        final Long amount = 1000L;
+        final VoucherAmountType amount = VoucherAmountType.KRW_30000;
 
         final String code = voucherService.publish(validFrom, validTo, amount);
 
@@ -75,7 +76,7 @@ class VoucherServiceTest {
         //Given
         final LocalDate validFrom = LocalDate.now();
         final LocalDate validTo = LocalDate.now().plusDays(30);
-        final Long amount = 1000L;
+        final VoucherAmountType amount = VoucherAmountType.KRW_30000;
 
         final String code = voucherService.publish(validFrom, validTo, amount);
 
