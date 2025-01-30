@@ -48,6 +48,8 @@ class VoucherServiceV3Test {
         assertThat(voucherEntity.status()).isEqualTo(VoucherStatusType.PUBLISH);
         assertThat(voucherEntity.validFrom()).isEqualTo(LocalDate.now());
         assertThat(voucherEntity.validTo()).isEqualTo(LocalDate.now().plusDays(contractEntity.voucherValidPeriodDayCount()));
+
+        System.out.println("### voucherEntity.validTo()" + voucherEntity.validTo());
         assertThat(voucherEntity.amount()).isEqualTo(amount);
 
         // history
