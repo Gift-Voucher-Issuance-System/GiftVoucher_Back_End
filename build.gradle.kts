@@ -29,6 +29,9 @@ dependencies {
 
     runtimeOnly("com.mysql:mysql-connector-j")
     runtimeOnly("com.h2database:h2")
+
+    implementation ("org.projectlombok:lombok")
+    annotationProcessor ("org.projectlombok:lombok")
 }
 
 tasks.withType<Test> {

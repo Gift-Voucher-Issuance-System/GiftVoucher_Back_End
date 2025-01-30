@@ -4,11 +4,13 @@ import com.seol.giftvoucher_back_end.common.type.VoucherAmountType;
 import com.seol.giftvoucher_back_end.common.type.VoucherStatusType;
 import com.seol.giftvoucher_back_end.storage.BaseEntity;
 import jakarta.persistence.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Table(name = "voucher")
 @Entity
 public class VoucherEntity extends BaseEntity {
@@ -63,11 +65,15 @@ public class VoucherEntity extends BaseEntity {
     }
 
     public void disable() {
+        log.info("비활성화 전 상태: {}", this.status);
+
         if (!this.status.equals(VoucherStatusType.PUBLISH)) {
             throw new IllegalStateException("사용 불가 처리할 수 없는 상태의 상품권 입니다.");
         }
 
         this.status = VoucherStatusType.DISABLE;
+
+        log.info("비활성화 후 상태: {}", this.status);
     }
 
     public void use() {
