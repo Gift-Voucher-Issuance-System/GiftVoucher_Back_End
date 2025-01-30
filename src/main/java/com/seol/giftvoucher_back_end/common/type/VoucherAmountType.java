@@ -8,11 +8,11 @@ public enum VoucherAmountType {
 
     private final Long amount;
 
-    VoucherAmountType(Long amount){
+    VoucherAmountType(Long amount) {
         this.amount = amount;
     }
 
-    public Long amount(){
+    public Long amount() {
         return amount;
     }
 }
