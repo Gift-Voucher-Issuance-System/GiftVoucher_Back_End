@@ -10,23 +10,24 @@ public class EmployeeEntity extends BaseEntity {
     private String position;
     private String department;
 
-   public EmployeeEntity(){}
-
-    public EmployeeEntity(String name, String position, String department){
-       this.name = name;
-       this.position = position;
-       this.department = department;
+    public EmployeeEntity() {
     }
 
-    public String name(){
-       return name;
+    public EmployeeEntity(String name, String position, String department) {
+        this.name = name;
+        this.position = position;
+        this.department = department;
     }
 
-    public String position(){
-       return  position;
+    public String name() {
+        return name;
     }
 
-    public String department(){
-       return department;
+    public String position() {
+        return position;
+    }
+
+    public String department() {
+        return department;
     }
 }

@@ -21,15 +21,15 @@ public class BaseEntity {
     @LastModifiedDate
     private LocalDateTime updateAt;
 
-    public Long id(){
+    public Long id() {
         return id;
     }
 
-    public LocalDateTime createAt(){
+    public LocalDateTime createAt() {
         return createAt;
     }
 
-    public LocalDateTime updateAt(){
+    public LocalDateTime updateAt() {
         return updateAt;
     }
 }

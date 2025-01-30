@@ -11,11 +11,11 @@ import java.time.LocalDateTime;
 public class OpenApiConfig {
     // http://localhost:8080/swagger-ui/index.html#/
     @Bean
-    public OpenAPI openApiInfo(){
+    public OpenAPI openApiInfo() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Gift Voucher API")
-                        .description("Gift Voucher API")
+                        .title("Project Voucher API")
+                        .description("Project Voucher API")
                         .version(LocalDateTime.now().toString()));
     }
 }
