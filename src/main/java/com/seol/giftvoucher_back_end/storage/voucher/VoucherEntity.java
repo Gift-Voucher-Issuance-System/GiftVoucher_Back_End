@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Slf4j
 @Table(name = "voucher")
 @Entity
 public class VoucherEntity extends BaseEntity {
@@ -64,23 +63,21 @@ public class VoucherEntity extends BaseEntity {
         return histories;
     }
 
-    public void disable() {
-        log.info("비활성화 전 상태: {}", this.status);
-
+    public void disable(final VoucherHistoryEntity voucherHistoryEntity) {
         if (!this.status.equals(VoucherStatusType.PUBLISH)) {
             throw new IllegalStateException("사용 불가 처리할 수 없는 상태의 상품권 입니다.");
         }
 
         this.status = VoucherStatusType.DISABLE;
-
-        log.info("비활성화 후 상태: {}", this.status);
+        this.histories.add(voucherHistoryEntity);
     }
 
-    public void use() {
+    public void use(final VoucherHistoryEntity voucherHistoryEntity) {
         if (!this.status.equals(VoucherStatusType.PUBLISH)) {
             throw new IllegalStateException("사용할 수 없는 상태의 상품권 입니다.");
         }
 
         this.status = VoucherStatusType.USE;
+        this.histories.add(voucherHistoryEntity);
     }
 }
