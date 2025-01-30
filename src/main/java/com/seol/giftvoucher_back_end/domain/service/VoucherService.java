@@ -3,6 +3,8 @@ package com.seol.giftvoucher_back_end.domain.service;
 import com.seol.giftvoucher_back_end.common.dto.RequestContext;
 import com.seol.giftvoucher_back_end.common.type.VoucherAmountType;
 import com.seol.giftvoucher_back_end.common.type.VoucherStatusType;
+import com.seol.giftvoucher_back_end.domain.service.validator.VoucherDisableValidator;
+import com.seol.giftvoucher_back_end.domain.service.validator.VoucherPublishValidator;
 import com.seol.giftvoucher_back_end.storage.voucher.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,12 +17,17 @@ public class VoucherService {
     private final VoucherRepository voucherRepository;
     private final ContractRepository contractRepository;
 
-    public VoucherService(VoucherRepository voucherRepository, ContractRepository contractRepository) {
+    private final VoucherPublishValidator voucherPublishValidator;
+    private final VoucherDisableValidator voucherDisableValidator;
+
+    public VoucherService(VoucherRepository voucherRepository, ContractRepository contractRepository, VoucherPublishValidator voucherPublishValidator, VoucherDisableValidator voucherDisableValidator) {
         this.voucherRepository = voucherRepository;
         this.contractRepository = contractRepository;
+        this.voucherPublishValidator = voucherPublishValidator;
+        this.voucherDisableValidator = voucherDisableValidator;
     }
 
-    // 상품권 발행 v1 TODO: 후에 지울 예정
+    // 상품권 발행 v1
     @Transactional
     public String publish(final LocalDate validFrom, final LocalDate validTo, final VoucherAmountType amount) {
         final String code = UUID.randomUUID().toString().toUpperCase().replaceAll("-", "");
@@ -85,14 +92,14 @@ public class VoucherService {
 
     // 상품권 발행 v3
     @Transactional
-    public String publishV3(final RequestContext requestContext, String contractCode , final VoucherAmountType amount) {
+    public String publishV3(final RequestContext requestContext, final String contractCode, final VoucherAmountType amount) {
         final String code = UUID.randomUUID().toString().toUpperCase().replaceAll("-", "");
         final String orderId = UUID.randomUUID().toString().toUpperCase().replaceAll("-", "");
 
-        final ContractEntity contractEntity = contractRepository.findByCode(contractCode).orElseThrow(()->new IllegalArgumentException("존재하지 않는 계약입니다."));
-        if (contractEntity.isExpired()) {
-            throw new IllegalStateException("유효기간이 지난 계약입니다.");
-        }
+        final ContractEntity contractEntity = contractRepository.findByCode(contractCode).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 계약입니다."));
+
+        voucherPublishValidator.validate(contractEntity);
+
         final VoucherHistoryEntity voucherHistoryEntity = new VoucherHistoryEntity(orderId, requestContext.requesterType(), requestContext.requesterId(), VoucherStatusType.PUBLISH, "테스트 발행");
         final VoucherEntity voucherEntity = new VoucherEntity(code, VoucherStatusType.PUBLISH, amount, voucherHistoryEntity, contractEntity);
 
@@ -103,13 +110,14 @@ public class VoucherService {
     @Transactional
     public void disableV3(final RequestContext requestContext, final String code) {
         final String orderId = UUID.randomUUID().toString().toUpperCase().replaceAll("-", "");
+
         final VoucherEntity voucherEntity = voucherRepository.findByCode(code)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품권입니다."));
-        if (voucherEntity.publishHistory().requesterType() != requestContext.requesterType()
-                || !voucherEntity.publishHistory().requesterId().equals(requestContext.requesterId())) {
-            throw new IllegalArgumentException("사용 불가 처리 권한이 없는 상품권 입니다.");
-        }
+
+        voucherDisableValidator.validate(voucherEntity, requestContext);
+
         final VoucherHistoryEntity voucherHistoryEntity = new VoucherHistoryEntity(orderId, requestContext.requesterType(), requestContext.requesterId(), VoucherStatusType.DISABLE, "테스트 사용 불가");
+
         voucherEntity.disable(voucherHistoryEntity);
     }
 }
